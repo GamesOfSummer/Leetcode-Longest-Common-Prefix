@@ -1,0 +1,27 @@
+{
+    "name": "sample-project",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "type": "commonjs",
+    "scripts": {
+        "run": "tsc src/index.ts src/helpers.ts --outDir out && node out/index.js",
+        "⬇️ install-npm-packages": "npm install",
+        "___Global install NCU to run the commands below": "https://www.npmjs.com/package/npm-check-updates",
+        "🔍check-npm-packages": "ncu",
+        "⬇️update-npm-packages": "ncu -u"
+    },
+    "repository": {
+        "type": "git"
+    },
+    "devDependencies": {
+        "@types/node": "^22.7.5",
+        "eslint": "^9.12.0",
+        "prettier": "3.3.3",
+        "typescript": "^5.6.3"
+    },
+    "dependencies": {
+        "chroma-console": "^1.0.34"
+    }
+}
+
