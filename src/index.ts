@@ -11,39 +11,30 @@ const romans = {
     M: 1000,
 };
 
-function converter(
-    accumulator: number,
-    number: number,
-    i: number,
-    array: any
-): number {
-    if (array[i] < array[i + 1]) {
-        accumulator -= array[i];
-    } else {
-        accumulator += array[i];
+function longestCommonPrefix(strs: string[]): string {
+    const sortedStrs = strs.sort();
+
+    const firsts = sortedStrs[0];
+    const lasts = sortedStrs[sortedStrs.length - 1];
+
+    let holderFirsts = firsts;
+    let holderLasts = lasts;
+
+    for (let i = 0; i < firsts.length; i++) {
+        if (holderFirsts !== holderLasts) {
+            holderFirsts = holderFirsts.slice(0, holderFirsts.length - 1);
+            holderLasts = holderLasts.slice(0, holderLasts.length - 1);
+        }
     }
 
-    return accumulator;
+    return holderFirsts;
 }
 
-function romanToInt(romanString: string): number {
-    const romanStringChars = romanString.split('');
-    const numbers = romanStringChars.map((x) => romans[x]);
-
-    const returnValue = numbers.reduce((acc, number, index, numbers) =>
-        converter(acc, number, index, numbers)
-    );
-
-    return returnValue;
-}
-
-//Coco.setColor('firewood');
 Coco.start();
-Coco.log('a');
-validateFxn(romanToInt('IV'), 4);
-validateFxn(romanToInt('LVIII'), 58);
-validateFxn(romanToInt('III'), 3);
-validateFxn(romanToInt('MCMXCIV'), 1994);
+
+validateFxn(longestCommonPrefix(['flower', 'flow', 'flight']), 'fl');
+validateFxn(longestCommonPrefix(['DEF', 'ABCC', 'HIJGK']), '');
+validateFxn(longestCommonPrefix(['IV', 'IV']), 'IV');
 
 Coco.end();
 

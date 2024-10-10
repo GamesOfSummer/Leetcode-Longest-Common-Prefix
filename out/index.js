@@ -11,28 +11,22 @@ var romans = {
     D: 500,
     M: 1000,
 };
-function converter(accumulator, number, i, array) {
-    if (array[i] < array[i + 1]) {
-        accumulator -= array[i];
+function longestCommonPrefix(strs) {
+    var sortedStrs = strs.sort();
+    var firsts = sortedStrs[0];
+    var lasts = sortedStrs[sortedStrs.length - 1];
+    var holderFirsts = firsts;
+    var holderLasts = lasts;
+    for (var i = 0; i < firsts.length; i++) {
+        if (holderFirsts !== holderLasts) {
+            holderFirsts = holderFirsts.slice(0, holderFirsts.length - 1);
+            holderLasts = holderLasts.slice(0, holderLasts.length - 1);
+        }
     }
-    else {
-        accumulator += array[i];
-    }
-    return accumulator;
+    return holderFirsts;
 }
-function romanToInt(romanString) {
-    var romanStringChars = romanString.split('');
-    var numbers = romanStringChars.map(function (x) { return romans[x]; });
-    var returnValue = numbers.reduce(function (acc, number, index, numbers) {
-        return converter(acc, number, index, numbers);
-    });
-    return returnValue;
-}
-//Coco.setColor('firewood');
 chroma_console_1.Coco.start();
-chroma_console_1.Coco.log('a');
-(0, helpers_js_1.validateFxn)(romanToInt('IV'), 4);
-(0, helpers_js_1.validateFxn)(romanToInt('LVIII'), 58);
-(0, helpers_js_1.validateFxn)(romanToInt('III'), 3);
-(0, helpers_js_1.validateFxn)(romanToInt('MCMXCIV'), 1994);
+(0, helpers_js_1.validateFxn)(longestCommonPrefix(['flower', 'flow', 'flight']), 'fl');
+(0, helpers_js_1.validateFxn)(longestCommonPrefix(['DEF', 'ABCC', 'HIJGK']), '');
+(0, helpers_js_1.validateFxn)(longestCommonPrefix(['IV', 'IV']), 'IV');
 chroma_console_1.Coco.end();
